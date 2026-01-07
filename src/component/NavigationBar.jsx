@@ -1,10 +1,10 @@
-import React from "react";
 import { Navbar, Container, Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Badge from "react-bootstrap/Badge";
-import Button from "react-bootstrap/Button";
+import { useSelector } from "react-redux";
 
 function NavigationBar() {
+  const { cartItems } = useSelector((state) => state.cartItemData);
   return (
     <Navbar bg="primary" variant="dark" expand="lg" sticky="top">
       <Container>
@@ -15,7 +15,7 @@ function NavigationBar() {
         <Navbar.Collapse id="main-navbar">
           <Nav className="ms-auto">
             <Nav.Link as={Link} to="/product-cart">
-              cart <Badge bg="danger">9</Badge>
+              cart <Badge bg="danger">{cartItems.length}</Badge>
             </Nav.Link>
             <Nav.Link as={Link} to="/user-profile">
               Profile
