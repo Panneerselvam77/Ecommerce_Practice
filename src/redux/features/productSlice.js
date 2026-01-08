@@ -42,7 +42,7 @@ const productSlice = createSlice({
       .addCase(fetchProduct.rejected, (state, action) => {
         console.log("Rejected Error", action.error);
 
-        state.isError = action.error;
+        state.isError = action.payload;
         state.isLoading = false;
       });
   },

@@ -8,15 +8,14 @@ import {
   decrementQuantity,
   removeCartItem,
 } from "../redux/features/cartSlice";
+
 export default function ProductCartPage() {
   const dispatch = useDispatch();
-  const { cartItems } = useSelector((state) => state.cartItemData);
+
+  const { cartItems, subtotal } = useSelector((state) => state.cartItemData);
   const { isLoading, isError, productsList } = useSelector(
     (state) => state.procutsState
   );
-
-  // console.log("Cart Item", cartItems);
-  // console.log("Products List", productsList);
 
   const cartItemsWithDetails = useMemo(() => {
     if (!cartItems || !productsList || !productsList.products) {
@@ -51,6 +50,7 @@ export default function ProductCartPage() {
   const getTotalAmount = (price, quantity) => {
     return price * quantity;
   };
+  
   if (isLoading) {
     return (
       <div>
@@ -120,7 +120,7 @@ export default function ProductCartPage() {
           </Table>
           <div>
             <div>
-              Total Amount: <span>100$</span>
+              Total Amount: <span>${subtotal}</span>
             </div>
             <div>
               <Button>Purchase</Button>

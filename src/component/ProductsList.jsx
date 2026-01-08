@@ -6,9 +6,14 @@ import { useDispatch } from "react-redux";
 export default function ProductList({ products = [] }) {
   const dispatch = useDispatch();
 
-  const handleCart = (e, id) => {
+  const handleCart = (e, product) => {
     e.preventDefault();
-    dispatch(addToCart(id));
+    dispatch(
+      addToCart({
+        id: product.id,
+        price: product.price,
+      })
+    );
   };
 
   return (
@@ -24,7 +29,7 @@ export default function ProductList({ products = [] }) {
                   <Card.Text>{product.description}</Card.Text>
                   <Button
                     variant="primary"
-                    onClick={(e) => handleCart(e, product.id)}
+                    onClick={(e) => handleCart(e, product)}
                   >
                     Add To Cart
                   </Button>
