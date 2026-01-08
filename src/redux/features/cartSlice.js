@@ -6,9 +6,6 @@ const initialState = {
   cartItems: [],
   subtotal: 0,
   totalItems: 0,
-  tax: 0,
-  shipping: 0,
-  discount: 0,
   total: 0,
   lastUpdated: null,
 };
@@ -48,9 +45,35 @@ const cartSlice = createSlice({
       state.cartItems = state.cartItems.filter((item) => item.id !== itemId);
       state.lastUpdated = new Date().toISOString();
     },
-    updateQuantity: () => {},
-    incrementQuantity: () => {},
-    decrementQuantity: () => {},
+    incrementQuantity: (state, action) => {
+      const itemId = action.payload;
+      const item = state.cartItems.find((item) => item.id === itemId);
+      if (item && item.quantity < MAX_QUANTITY_PER_ITEM) {
+        item.quantity += 1;
+      }
+    },
+    decrementQuantity: (state, action) => {
+      const itemid = action.payload;
+      const item = state.cartItems.find((item) => item.id === itemid);
+      if (item && item.quantity < MAX_QUANTITY_PER_ITEM) {
+        if (item.quantity > 1) {
+          item.quantity -= 1;
+        } else {
+          state.cartItems = state.cartItems.filter(
+            (item) => item.id !== itemid
+          );
+        }
+      }
+    },
+    removeFromCart: (state, action) => {
+      const itemId = action.payload;
+      if (!itemId) {
+        console.error("Invalid item id");
+        return;
+      }
+
+      state.items = state.items.filter((item) => item.id !== itemId);
+    },
     clearCart: () => {},
   },
 });
@@ -63,5 +86,4 @@ export const {
   clearCart,
   decrementQuantity,
   incrementQuantity,
-  updateQuantity,
 } = cartSlice.actions;

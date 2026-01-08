@@ -9,7 +9,7 @@ function NavigationBar() {
     <Navbar bg="primary" variant="dark" expand="lg" sticky="top">
       <Container>
         <Navbar.Brand as={Link} to="/">
-          Ecommer Ecart
+          Ecommerse Ecart
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="main-navbar" />
         <Navbar.Collapse id="main-navbar">

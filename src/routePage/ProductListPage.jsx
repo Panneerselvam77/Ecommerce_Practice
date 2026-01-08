@@ -17,7 +17,7 @@ export default function ProductListPage() {
 
   const { debouncedValue } = useDebounce(searchTerm, 500);
 
-  console.log("Products", productsList);
+  // console.log("Products", productsList);
 
   const filteredProduct = useMemo(() => {
     if (!debouncedValue) return productsList?.products;
